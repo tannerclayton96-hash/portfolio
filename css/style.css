@@ -119,6 +119,21 @@ body::before {
   background: var(--surface);
 }
 
+/* link to the personal side — teal hints at its aurora palette; the badge
+   comes off when the personal site opens to the public */
+.nav-personal { border: 1px solid rgba(45, 212, 191, 0.35); }
+.nav-personal .uc {
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f59e0b;
+  border: 1px dashed rgba(245, 158, 11, 0.5);
+  border-radius: 4px;
+  padding: 0.1rem 0.3rem;
+  margin-left: 0.35rem;
+  vertical-align: 1px;
+}
+
 /* ---------- hero / landing ---------- */
 .hero {
   position: relative;

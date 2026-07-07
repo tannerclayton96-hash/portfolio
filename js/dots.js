@@ -15,13 +15,17 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const finePointer = window.matchMedia("(pointer: fine)").matches;
 
-  const CYAN = [34, 211, 238], VIOLET = [139, 92, 246], PINK = [236, 72, 153], AMBER = [245, 158, 11];
-  const PALETTE = [CYAN, VIOLET, PINK, AMBER];
+  // aurora borealis palette (amber reserved for the "home" marker)
+  const EMERALD = [52, 211, 153], TEAL = [45, 212, 191], ICE = [125, 211, 252], MINT = [167, 243, 208];
+  const AMBER = [245, 158, 11];
+  const PALETTE = [EMERALD, TEAL, ICE, MINT];
 
   let w = 0, h = 0, dots = [];
   const mouse = { x: -1e4, y: -1e4 };
   let mode = "wave";          // "wave" | shape name
   let shapeTargets = null;    // [{x, y, c}] in screen px, one per dot
+  let oscRect = null;         // px rect of the TV screen (oscilloscope area)
+  let homePx = null;          // px location of home (Lehi, UT) on the map
 
   // ---------- shape samplers ----------
 
@@ -46,7 +50,14 @@
 
   const SHAPES = {
     travels() {
-      return { aspect: WORLD_MAP.aspect, points: WORLD_MAP.points, color: () => (Math.random() < 0.85 ? CYAN : VIOLET) };
+      return {
+        aspect: WORLD_MAP.aspect,
+        points: WORLD_MAP.points,
+        color: () => (Math.random() < 0.8 ? EMERALD : MINT),
+        // Lehi, UT (40.39N 111.85W) in the baked map's normalized frame
+        // (lon -180..180, lat 78..-56)
+        home: [(-111.85 + 180) / 360, (78 - 40.39) / 134],
+      };
     },
     bio() {
       const s = samplePoints(1.3, (c, W, H) => {
@@ -55,7 +66,7 @@
         c.textBaseline = "middle";
         c.fillText("CT", W / 2, H * 0.56);
       });
-      s.color = (p) => (p[0] < 0.5 ? CYAN : PINK); // C cyan, T pink
+      s.color = (p) => (p[0] < 0.5 ? ICE : EMERALD); // C ice, T emerald
       return s;
     },
     passions() {
@@ -71,7 +82,7 @@
         }
         c.fill();
       });
-      s.color = () => (Math.random() < 0.8 ? PINK : VIOLET);
+      s.color = () => (Math.random() < 0.75 ? MINT : TEAL);
       return s;
     },
     hobbies() {
@@ -93,7 +104,10 @@
         c.fill();
         c.globalCompositeOperation = "source-over";
       });
-      s.color = () => (Math.random() < 0.7 ? VIOLET : AMBER);
+      s.color = () => (Math.random() < 0.7 ? TEAL : ICE);
+      // where the punched-out screen sits, in the shape's normalized frame —
+      // the oscilloscope trace lives inside this rect
+      s.screen = { x: 0.16, y: 0.36, w: 0.52, h: 0.48 };
       return s;
     },
   };
@@ -136,6 +150,51 @@
     for (let i = targets.length - 1; i > 0; i--) {
       const j = (Math.random() * (i + 1)) | 0;
       [targets[i], targets[j]] = [targets[j], targets[i]];
+    }
+
+    // extras: oscilloscope trace inside the TV, home icon on the map.
+    // Post-shuffle, targets[0..K] are random dots, so overwriting them
+    // steals evenly from all over the shape.
+    oscRect = null;
+    homePx = null;
+    if (shape.screen) {
+      const padX = sw * 0.03, padY = sh * 0.05;
+      oscRect = {
+        x: ox + shape.screen.x * sw + padX,
+        y: oy + shape.screen.y * sh + padY,
+        w: shape.screen.w * sw - padX * 2,
+        h: shape.screen.h * sh - padY * 2,
+      };
+      const K = Math.min(90, targets.length >> 3);
+      for (let k = 0; k < K; k++) targets[k] = { osc: k / (K - 1), c: MINT };
+    }
+    if (shape.home) {
+      homePx = { x: ox + shape.home[0] * sw, y: oy + shape.home[1] * sh };
+      const s = Math.max(12, Math.min(24, sh * 0.07)); // house half-width in px
+      // little house perimeter: roof apex → eaves → walls → base, sampled evenly
+      const path = [
+        [0, -1.15], [0.95, -0.25], [0.95, 0.9], [-0.95, 0.9], [-0.95, -0.25], [0, -1.15],
+      ];
+      const segs = [];
+      let total = 0;
+      for (let i = 0; i < path.length - 1; i++) {
+        const len = Math.hypot(path[i + 1][0] - path[i][0], path[i + 1][1] - path[i][1]);
+        segs.push({ a: path[i], b: path[i + 1], len });
+        total += len;
+      }
+      const K = 34;
+      let k = 0;
+      for (const seg of segs) {
+        const n = Math.round((seg.len / total) * K);
+        for (let i = 0; i < n && k < K; i++, k++) {
+          const u = i / n;
+          targets[90 + k] = {
+            x: homePx.x + (seg.a[0] + (seg.b[0] - seg.a[0]) * u) * s,
+            y: homePx.y + (seg.a[1] + (seg.b[1] - seg.a[1]) * u) * s,
+            c: AMBER,
+          };
+        }
+      }
     }
     return targets;
   }
@@ -197,9 +256,18 @@
         tc = d.c;
       } else {
         const s = shapeTargets[i];
-        // gentle breathing so formed shapes stay alive
-        tx = s.x + Math.sin(t * 1.4 + d.ph) * 1.5;
-        ty = s.y + Math.cos(t * 1.2 + d.ph) * 1.5;
+        if (s.osc !== undefined && oscRect) {
+          // oscilloscope trace sweeping inside the TV screen
+          const u = s.osc;
+          tx = oscRect.x + u * oscRect.w;
+          ty = oscRect.y + oscRect.h * 0.5 +
+            (Math.sin(u * Math.PI * 4 + t * 2.6) * 0.6 +
+             Math.sin(u * Math.PI * 7.3 - t * 1.6) * 0.25) * oscRect.h * 0.4;
+        } else {
+          // gentle breathing so formed shapes stay alive
+          tx = s.x + Math.sin(t * 1.4 + d.ph) * 1.5;
+          ty = s.y + Math.cos(t * 1.2 + d.ph) * 1.5;
+        }
         tc = s.c;
       }
 
@@ -226,6 +294,17 @@
       ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
       ctx.fill();
     }
+
+    // pulsing beacon around home on the travels map
+    if (mode === "travels" && homePx) {
+      const pulse = reduceMotion ? 0.35 : (t * 0.45) % 1;
+      ctx.beginPath();
+      ctx.strokeStyle = `rgba(245, 158, 11, ${(1 - pulse) * 0.55})`;
+      ctx.lineWidth = 1.5;
+      ctx.arc(homePx.x, homePx.y, 8 + pulse * 30, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+
     requestAnimationFrame(tick);
   }
 

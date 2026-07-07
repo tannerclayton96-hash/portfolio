@@ -3,16 +3,17 @@
    but doesn't import it, so the two pages can evolve independently. */
 
 :root {
-  --bg: #06080f;
-  --ink: #e8ecf4;
-  --muted: #9aa3b5;
-  --cyan: #22d3ee;
-  --violet: #8b5cf6;
-  --pink: #ec4899;
-  --amber: #f59e0b;
-  --grad: linear-gradient(100deg, var(--cyan), var(--violet), var(--pink));
-  --glass: rgba(14, 18, 32, 0.72);
-  --glass-border: rgba(139, 92, 246, 0.25);
+  /* aurora borealis palette — northern-lights greens on deep green-black */
+  --bg: #04100c;
+  --ink: #e7f5ef;
+  --muted: #8fb3a6;
+  --a1: #34d399; /* emerald */
+  --a2: #2dd4bf; /* teal */
+  --a3: #7dd3fc; /* ice blue */
+  --a4: #a7f3d0; /* mint */
+  --grad: linear-gradient(100deg, var(--a1), var(--a2), var(--a3));
+  --glass: rgba(8, 22, 17, 0.72);
+  --glass-border: rgba(45, 212, 191, 0.25);
 }
 
 * { box-sizing: border-box; }
@@ -43,7 +44,7 @@ html, body {
   z-index: 50;
   display: grid;
   place-items: center;
-  background: radial-gradient(ellipse at 50% 40%, rgba(139, 92, 246, 0.12), transparent 60%), var(--bg);
+  background: radial-gradient(ellipse at 50% 40%, rgba(52, 211, 153, 0.1), transparent 60%), var(--bg);
   transition: opacity 0.6s ease;
 }
 #gate.open { opacity: 0; pointer-events: none; }
@@ -77,7 +78,7 @@ html, body {
   text-align: center;
   letter-spacing: 0.15em;
 }
-.gate-card input:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.15); }
+.gate-card input:focus { border-color: var(--a2); box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.15); }
 .gate-card button {
   margin-top: 0.9rem;
   width: 100%;
@@ -92,7 +93,7 @@ html, body {
   cursor: pointer;
 }
 .gate-card.deny { animation: shake 0.4s ease; }
-.gate-card.deny input { border-color: var(--pink); }
+.gate-card.deny input { border-color: #f87171; }
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   25% { transform: translateX(-8px); }
@@ -138,8 +139,9 @@ html, body {
   transition: color 0.2s, border-color 0.2s;
 }
 .ps-nav button:hover, .ps-nav a:hover { color: var(--ink); border-color: var(--glass-border); }
-.ps-nav button.active { color: var(--ink); border-color: var(--cyan); }
-.ps-nav .pro-link { border-color: rgba(245, 158, 11, 0.35); color: var(--amber); }
+.ps-nav button.active { color: var(--ink); border-color: var(--a2); }
+/* amber on purpose — it's the "leave for the other site" cue */
+.ps-nav .pro-link { border-color: rgba(245, 158, 11, 0.35); color: #f59e0b; }
 
 /* ---------- content panels ---------- */
 .panel {
@@ -197,7 +199,7 @@ html, body {
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: 10px;
-  border: 1px solid rgba(139, 92, 246, 0.2);
+  border: 1px solid rgba(45, 212, 191, 0.2);
   cursor: pointer;
   display: block;
 }
@@ -208,7 +210,7 @@ html, body {
   border: 0;
   border-radius: 6px;
   background: rgba(6, 8, 15, 0.75);
-  color: var(--pink);
+  color: #f87171;
   cursor: pointer;
   font-size: 0.75rem;
   padding: 2px 6px;
@@ -219,7 +221,7 @@ html, body {
   padding: 0.5rem 1rem;
   border-radius: 999px;
   border: 1px dashed var(--glass-border);
-  color: var(--cyan);
+  color: var(--a2);
   font-size: 0.85rem;
   cursor: pointer;
 }
