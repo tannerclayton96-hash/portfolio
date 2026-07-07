@@ -1,0 +1,353 @@
+/* ============================================================
+   Tanner Clayton — portfolio
+   CRT-inspired theme: dark base, phosphor-green accent,
+   subtle scanlines. Content sections stay calm and readable.
+   ============================================================ */
+
+:root {
+  --bg: #0b0f0c;
+  --bg-raised: #11171280;
+  --ink: #d8e6d8;
+  --ink-dim: #8fa48f;
+  --phosphor: #4ade80;
+  --phosphor-soft: #4ade8022;
+  --amber: #fbbf24;
+  --border: #2a3a2c;
+  --radius: 10px;
+  --mono: "Cascadia Code", "Consolas", "SF Mono", monospace;
+  --sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+  /* cursor position, updated by js */
+  --mx: 50%;
+  --my: 40%;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ---------- CRT scanlines (whole page, very subtle) ---------- */
+.scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 2px,
+    rgba(0, 0, 0, 0.14) 2px 4px
+  );
+  mix-blend-mode: multiply;
+}
+
+/* ---------- header ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.4rem;
+  background: #0b0f0cee;
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--phosphor);
+  text-decoration: none;
+  text-shadow: 0 0 12px var(--phosphor-soft);
+}
+
+.blink { animation: blink 1.2s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+.site-header nav {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.site-header nav a {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--ink-dim);
+  text-decoration: none;
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+}
+
+.site-header nav a:hover {
+  color: var(--phosphor);
+  background: var(--phosphor-soft);
+}
+
+/* ---------- hero / landing ---------- */
+.hero {
+  position: relative;
+  min-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.2rem 3rem;
+  isolation: isolate;
+}
+
+/* phosphor glow that follows the cursor (js sets --mx/--my) */
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    600px circle at var(--mx) var(--my),
+    rgba(74, 222, 128, 0.10),
+    rgba(74, 222, 128, 0.03) 40%,
+    transparent 70%
+  );
+  transition: background 0.08s linear;
+}
+
+/* the "TV" card — js adds a gentle 3D tilt toward the cursor */
+.tv-card {
+  width: min(680px, 100%);
+  background: linear-gradient(160deg, #121a13, #0d130e);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 2.4rem 2.2rem 1.6rem;
+  box-shadow:
+    0 0 0 6px #060906,
+    0 0 40px rgba(74, 222, 128, 0.07),
+    inset 0 0 60px rgba(0, 0, 0, 0.5);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.osd-top, .osd-bottom {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--ink-dim);
+}
+
+.osd-bottom { margin-top: 2rem; letter-spacing: 0.08em; }
+
+.osd-chip {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--phosphor);
+  background: var(--phosphor-soft);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0.15rem 0.5rem;
+  letter-spacing: 0.1em;
+  vertical-align: middle;
+}
+
+.osd-rec { color: var(--amber); background: #fbbf2415; }
+
+.tv-card h1 {
+  font-family: var(--mono);
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  margin: 1.4rem 0 0.8rem;
+  color: var(--phosphor);
+  text-shadow: 0 0 18px rgba(74, 222, 128, 0.35);
+  letter-spacing: 0.02em;
+}
+
+.tagline {
+  max-width: 52ch;
+  color: var(--ink);
+  font-size: 1.05rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 1.6rem;
+}
+
+.scroll-hint {
+  margin-top: 2.2rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--ink-dim);
+  animation: bob 2s ease-in-out infinite;
+}
+@keyframes bob { 50% { transform: translateY(5px); } }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--ink);
+  text-decoration: none;
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  transition: border-color 0.15s, box-shadow 0.15s, color 0.15s;
+}
+
+.btn:hover {
+  border-color: var(--phosphor);
+  color: var(--phosphor);
+  box-shadow: 0 0 14px rgba(74, 222, 128, 0.18);
+}
+
+.btn-primary {
+  border-color: var(--phosphor);
+  color: var(--phosphor);
+  background: var(--phosphor-soft);
+}
+
+/* ---------- content sections (calm, readable) ---------- */
+.section {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 4.5rem 1.4rem;
+  border-top: 1px solid var(--border);
+}
+
+.section h2 {
+  font-family: var(--mono);
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 0.5rem;
+}
+
+.section-lede { color: var(--ink-dim); margin-bottom: 2rem; }
+
+/* projects */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.4rem;
+}
+
+.project-card {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.project-card.featured { grid-column: 1 / -1; }
+
+.project-card h3 { font-family: var(--mono); font-size: 1.1rem; }
+
+.project-card.coming-soon {
+  border-style: dashed;
+  color: var(--ink-dim);
+  justify-content: center;
+  text-align: center;
+}
+
+.thumb {
+  aspect-ratio: 16 / 9;
+  max-height: 320px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(circle at 50% 45%, #1a241b, #0d120e 75%);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.thumb-placeholder {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--ink-dim);
+}
+
+.tag-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.tag-list li {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink-dim);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.15rem 0.65rem;
+}
+
+/* skills */
+.skill-list {
+  list-style: none;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.skill-list li {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.8rem 1.1rem;
+}
+
+.skill-list a { color: var(--phosphor); }
+
+/* contact */
+.contact-row { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+
+/* footer */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 1.4rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--ink-dim);
+}
+
+/* ---------- project write-up pages ---------- */
+.writeup {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 3rem 1.4rem 5rem;
+}
+
+.writeup h1 { font-family: var(--mono); font-size: 2rem; margin: 1rem 0; color: var(--phosphor); }
+.writeup h2 { font-family: var(--mono); font-size: 1.2rem; margin: 2.2rem 0 0.7rem; }
+.writeup p, .writeup li { color: var(--ink); margin-bottom: 0.8rem; }
+.writeup ul { padding-left: 1.4rem; }
+.writeup .back { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-dim); text-decoration: none; }
+.writeup .back:hover { color: var(--phosphor); }
+.writeup figure { margin: 1.6rem 0; }
+.writeup figcaption { font-size: 0.8rem; color: var(--ink-dim); font-family: var(--mono); margin-top: 0.4rem; }
+
+/* ---------- accessibility: kill all motion if requested ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .blink, .scroll-hint { animation: none; }
+  .hero-glow { transition: none; }
+  .tv-card { transform: none !important; }
+}

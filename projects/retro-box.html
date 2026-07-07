@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Retro-Box: a Raspberry Pi 4 + Sony PVM-9042Q CRT build that recreates channel-surfing broadcast TV from a personal media library.">
+  <title>Retro-Box — Tanner Clayton</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <main class="writeup">
+    <a class="back" href="../index.html#projects">← back to all projects</a>
+
+    <h1>Retro-Box</h1>
+    <p><span class="osd-chip">HARDWARE</span> <span class="osd-chip">SOFTWARE</span> <span class="osd-chip">2026</span></p>
+
+    <figure>
+      <!-- EDIT ME: replace with real hero photo -->
+      <div class="thumb" role="img" aria-label="Retro-Box hero photo placeholder">
+        <span class="thumb-placeholder">📺 hero photo: the PVM mid-channel-surf</span>
+      </div>
+      <figcaption>Sony PVM-9042Q running the Retro-Box channel lineup.</figcaption>
+    </figure>
+
+    <h2>The idea</h2>
+    <p>
+      Streaming killed the best part of TV: not choosing. Retro-Box brings back
+      channel-surfing — a Raspberry Pi 4 feeds a 1990s Sony PVM broadcast monitor
+      a lineup of "channels" built from shows on a hard drive. Turn it on and
+      something is already playing. Flip channels and you land mid-episode,
+      just like real broadcast TV.
+    </p>
+
+    <h2>How it works</h2>
+    <!-- EDIT ME: tighten these to match the real implementation -->
+    <ul>
+      <li>Raspberry Pi 4 outputs composite video to the PVM for the authentic CRT look.</li>
+      <li>Shows live on an attached hard drive, organized into themed channels.</li>
+      <li>A scheduler decides what's "on air" per channel, so flipping back to a channel resumes the broadcast where it would naturally be.</li>
+      <li>Channel changes trigger a static/tuning effect for the full vintage feel.</li>
+    </ul>
+
+    <h2>What was hard</h2>
+    <!-- EDIT ME: this is the section employers actually read — be specific -->
+    <ul>
+      <li>Getting clean composite output and correct geometry on the PVM.</li>
+      <li>Making "what's on right now" deterministic so channels feel like live broadcasts, not playlists.</li>
+      <li>Fast, seamless channel switching on modest Pi hardware.</li>
+    </ul>
+
+    <h2>Built with</h2>
+    <ul class="tag-list" style="list-style:none;padding-left:0">
+      <li>Raspberry Pi 4</li><li>Sony PVM-9042Q</li><li>Linux</li><li>Python</li><li>Composite video</li>
+    </ul>
+
+    <p style="margin-top:2rem">
+      <!-- EDIT ME: real repo link -->
+      <a class="btn" href="https://github.com/YOUR-GITHUB/retro-box">Source on GitHub →</a>
+    </p>
+  </main>
+
+</body>
+</html>

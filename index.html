@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tanner Clayton — builder of retro hardware projects and software. Portfolio, projects, and contact.">
+  <title>Tanner Clayton — Builder &amp; Tinkerer</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- CRT scanline overlay (visual only) -->
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="logo" href="#home">TC<span class="blink">_</span></a>
+    <nav aria-label="Main navigation">
+      <a href="#home">CH 01 · Home</a>
+      <a href="#projects">CH 02 · Projects</a>
+      <a href="#skills">CH 03 · Skills</a>
+      <a href="#contact">CH 04 · Contact</a>
+    </nav>
+  </header>
+
+  <!-- ============ CH 01 · LANDING ============ -->
+  <section id="home" class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+
+    <div class="tv-card" id="tvCard">
+      <div class="osd-top">
+        <span class="osd-chip">CH 01</span>
+        <span class="osd-chip osd-rec">● LIVE</span>
+      </div>
+
+      <h1>Tanner Clayton</h1>
+      <!-- EDIT ME: your 2–3 sentence intro. Keep it human. -->
+      <p class="tagline">
+        I build things that blend old hardware with new software —
+        like a Raspberry Pi that turns a 1990s broadcast monitor into a
+        channel-surfing TV. Based in Utah. Currently open to opportunities.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projects">See my work</a>
+        <a class="btn" href="assets/resume.pdf" download>Resume (PDF)</a>
+      </div>
+
+      <div class="osd-bottom">
+        <span>VOL ▮▮▮▮▮▯▯▯</span>
+        <span>AUTO · NTSC</span>
+      </div>
+    </div>
+
+    <p class="scroll-hint" aria-hidden="true">▼ scroll</p>
+  </section>
+
+  <!-- ============ CH 02 · PROJECTS ============ -->
+  <section id="projects" class="section">
+    <h2><span class="osd-chip">CH 02</span> Projects</h2>
+    <p class="section-lede">Things I've actually built and finished. Write-ups include what was hard, not just what worked.</p>
+
+    <div class="project-grid">
+      <article class="project-card featured">
+        <div class="thumb" role="img" aria-label="Retro-Box: Sony PVM CRT displaying a retro TV interface">
+          <!-- EDIT ME: replace with a real photo — assets/retrobox-hero.jpg -->
+          <span class="thumb-placeholder">📺 photo of the PVM goes here</span>
+        </div>
+        <h3>Retro-Box — CRT Channel-Surfing TV</h3>
+        <p>
+          A Raspberry Pi 4 wired to a Sony PVM-9042Q broadcast monitor that plays
+          shows off a hard drive like real broadcast TV — flip channels, catch
+          whatever's "on air." No menus, no pausing. Just TV, the way it used to feel.
+        </p>
+        <ul class="tag-list">
+          <li>Raspberry Pi</li><li>Linux</li><li>Python</li><li>Composite video</li><li>Hardware</li>
+        </ul>
+        <a class="btn" href="projects/retro-box.html">Full write-up →</a>
+      </article>
+
+      <article class="project-card coming-soon">
+        <h3>Next build</h3>
+        <p>In progress — check back soon. <!-- EDIT ME when you have a second project --></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ CH 03 · SKILLS ============ -->
+  <section id="skills" class="section">
+    <h2><span class="osd-chip">CH 03</span> Skills</h2>
+    <p class="section-lede">Every skill here links to proof — a project where I used it for real.</p>
+
+    <!-- EDIT ME: adjust skills + evidence links to match reality -->
+    <ul class="skill-list">
+      <li><strong>Raspberry Pi &amp; single-board computers</strong> — <a href="projects/retro-box.html">Retro-Box</a></li>
+      <li><strong>Linux setup &amp; scripting</strong> — <a href="projects/retro-box.html">Retro-Box</a></li>
+      <li><strong>Python</strong> — <a href="projects/retro-box.html">Retro-Box channel scheduler</a></li>
+      <li><strong>Hardware integration (CRT / analog video)</strong> — <a href="projects/retro-box.html">Retro-Box</a></li>
+      <li><strong>Building with AI pair-programming tools</strong> — this site + Retro-Box</li>
+    </ul>
+  </section>
+
+  <!-- ============ CH 04 · CONTACT ============ -->
+  <section id="contact" class="section">
+    <h2><span class="osd-chip">CH 04</span> Contact</h2>
+    <p class="section-lede">Open to full-time roles, freelance builds, and interesting collaborations.</p>
+
+    <div class="contact-row">
+      <a class="btn btn-primary" href="mailto:tannerclayton96@gmail.com">tannerclayton96@gmail.com</a>
+      <!-- EDIT ME: real profile URLs -->
+      <a class="btn" href="https://github.com/YOUR-GITHUB" rel="me">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/YOUR-LINKEDIN" rel="me">LinkedIn</a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>© 2026 Tanner Clayton · Built by hand with HTML, CSS &amp; JS · <span class="osd-chip">SIGNAL OK</span></p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
