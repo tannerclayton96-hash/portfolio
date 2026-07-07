@@ -9,7 +9,7 @@
 
   const root = document.documentElement;
   const hero = document.querySelector(".hero");
-  const card = document.getElementById("tvCard");
+  const card = document.getElementById("heroCard");
   if (!hero || !card) return;
 
   // rAF throttle: apply at most one update per frame
@@ -26,7 +26,7 @@
       const x = ev.clientX - rect.left;
       const y = ev.clientY - rect.top;
 
-      // 1) phosphor glow follows the cursor
+      // 1) aurora glow follows the cursor
       root.style.setProperty("--mx", `${(x / rect.width) * 100}%`);
       root.style.setProperty("--my", `${(y / rect.height) * 100}%`);
 
