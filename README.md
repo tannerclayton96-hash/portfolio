@@ -1,4 +1,4 @@
-# Portfolio site — Tanner Clayton
+# Portfolio site — Clayton Tanner
 
 Personal portfolio: CRT-inspired interactive landing page (cursor-tracking phosphor
 glow + card tilt), with calm, employer-readable content sections. Plain HTML/CSS/JS,
@@ -17,7 +17,7 @@ python -m http.server 4321
 
 Search the code for `EDIT ME` to find every placeholder. You need:
 
-- [ ] Confirm name spelling/order in `index.html` (currently "Tanner Clayton")
+- [ ] Confirm name spelling/order in `index.html` (currently "Clayton Tanner")
 - [ ] 2–3 sentence intro (hero tagline in `index.html`)
 - [ ] Photos of the Retro-Box → `assets/retrobox-hero.jpg` (+ swap the placeholder `.thumb` divs for `<img>` tags)
 - [ ] Short demo video/GIF of channel surfing
