@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <meta name="robots" content="noindex">
+  <title>Clayton — Personal</title>
+  <link rel="stylesheet" href="css/personal.css">
+</head>
+<body>
+
+  <!-- password gate (privacy curtain — see js/gate.js) -->
+  <div id="gate">
+    <form class="gate-card" id="gateForm">
+      <h1>CLAYTON · PERSONAL</h1>
+      <p>This corner is under construction. Enter the password.</p>
+      <input type="password" id="gatePass" autocomplete="off" autofocus aria-label="Password">
+      <button type="submit">Enter</button>
+    </form>
+  </div>
+
+  <canvas id="dotfield" aria-hidden="true"></canvas>
+
+  <header class="ps-header">
+    <a class="ps-logo" href="personal.html">CT</a>
+    <nav class="ps-nav" id="psNav" aria-label="Sections">
+      <button data-shape="bio">Bio</button>
+      <button data-shape="travels">Travels</button>
+      <button data-shape="hobbies">Hobbies</button>
+      <button data-shape="passions">Passions</button>
+      <a class="pro-link" href="index.html">Professional site →</a>
+    </nav>
+  </header>
+
+  <!-- ============ PANELS ============ -->
+  <aside class="panel" id="panel-bio" aria-label="Bio">
+    <button class="close" aria-label="Close">✕</button>
+    <h2>Bio</h2>
+    <p class="sub">The person behind the resume.</p>
+    <!-- EDIT ME: drafted from what I know — rewrite in your own voice -->
+    <p>
+      I'm Clayton — a builder living in Lehi, Utah. By day I get e-commerce
+      brands live at Order Protection; by night I'm usually elbow-deep in a
+      project that has no business existing, like wiring a Raspberry Pi to a
+      1990s broadcast monitor so I can channel-surf my own TV library.
+    </p>
+    <p>
+      I like making things that feel finished — hardware, software, or
+      otherwise. This side of the site is where the non-work stuff lives.
+    </p>
+  </aside>
+
+  <aside class="panel" id="panel-travels" aria-label="Travels">
+    <button class="close" aria-label="Close">✕</button>
+    <h2>Travels</h2>
+    <p class="sub">Places we've been. The dots behind you are the map.</p>
+    <!-- EDIT ME: a sentence or two about how you two travel -->
+    <p>Photos from the road — more coming as I dig through the camera roll.</p>
+    <div class="photo-grid" id="travelGrid"></div>
+    <div class="upload-row">
+      <label for="travelUpload">+ Add photos</label>
+      <input type="file" id="travelUpload" accept="image/*" multiple>
+      <p class="upload-note">
+        Added photos are stored in this browser only (IndexedDB) so you can
+        try layouts. To publish them, copy the files into
+        <code>assets/travel/</code> and list them in <code>js/travel-gallery.js</code>.
+      </p>
+    </div>
+  </aside>
+
+  <aside class="panel" id="panel-hobbies" aria-label="Hobbies">
+    <button class="close" aria-label="Close">✕</button>
+    <h2>Hobbies</h2>
+    <p class="sub">What the workbench looks like.</p>
+    <!-- EDIT ME: keep, cut, or add — gaming? music? -->
+    <ul>
+      <li><strong>Retro hardware</strong> — the Retro-Box CRT build lives on the <a href="index.html#projects" style="color:var(--cyan)">professional side</a>, but it started as pure hobby.</li>
+      <li><strong>Tinkering &amp; tooling</strong> — small utilities and dashboards for things I actually use, like a CS2 case-opening tracker.</li>
+      <li><strong>Building with AI</strong> — this whole site is a running experiment in it.</li>
+    </ul>
+  </aside>
+
+  <aside class="panel" id="panel-passions" aria-label="Passions">
+    <button class="close" aria-label="Close">✕</button>
+    <h2>Passions</h2>
+    <p class="sub">The why behind the what.</p>
+    <!-- EDIT ME: this one is all you -->
+    <p>
+      Making things is the whole point — the moment an idea becomes something
+      you can hold, watch, or use. Everything else on this site is downstream
+      of that.
+    </p>
+  </aside>
+
+  <div id="lightbox"><img alt=""></div>
+  <p class="hint">pick a section — the dots know the shape · Esc to let them float</p>
+
+  <script src="js/worldmap-data.js"></script>
+  <script src="js/gate.js"></script>
+  <script src="js/dots.js"></script>
+  <script src="js/travel-gallery.js"></script>
+</body>
+</html>

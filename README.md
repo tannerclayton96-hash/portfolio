@@ -26,6 +26,22 @@ Search the code for `EDIT ME` to find every placeholder. You need:
 - [ ] Verify/expand the "How it works" and "What was hard" sections in `projects/retro-box.html`
 - [ ] Skills list — keep only what's real, each linked to evidence
 
+## Personal side (branch: `personal-site`)
+
+`personal.html` is the future personal homepage, in progress on this branch while
+`main` stays the employer-facing site. A full-screen dot field idles in sine waves
+and morphs into a shape per section: world map (Travels), CT monogram (Bio),
+CRT TV (Hobbies), heart (Passions). It sits behind a password gate (`js/gate.js` —
+a privacy curtain, not real security: everything behind it is still in this public
+repo). Local preview shortcuts: `personal.html?preview` skips the gate on
+localhost; `&shape=travels` deep-links a section. Travel photos: commit files to
+`assets/travel/` and list them in `js/travel-gallery.js`; the in-page "+ Add
+photos" button stores drafts in your browser only. World map dots are baked into
+`js/worldmap-data.js` from Natural Earth data.
+
+Eventual plan: personal becomes the homepage, professional becomes the tab you
+send to employers.
+
 ## Deploying to GitHub Pages (when ready)
 
 1. Create a repo (e.g. `portfolio`), push this folder.
