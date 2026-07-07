@@ -300,6 +300,39 @@ body {
   padding: 0.15rem 0.65rem;
 }
 
+/* experience */
+.xp-list { display: grid; gap: 1.2rem; }
+
+.xp-item {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--phosphor);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.4rem;
+}
+
+.xp-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.4rem;
+}
+
+.xp-head h3 { font-family: var(--mono); font-size: 1rem; }
+
+.xp-dates {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--ink-dim);
+  white-space: nowrap;
+}
+
+.xp-item p { color: var(--ink-dim); font-size: 0.95rem; }
+
+.section-lede a { color: var(--phosphor); }
+
 /* skills */
 .skill-list {
   list-style: none;

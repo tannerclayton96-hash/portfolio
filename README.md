@@ -17,11 +17,11 @@ python -m http.server 4321
 
 Search the code for `EDIT ME` to find every placeholder. You need:
 
-- [ ] Confirm name spelling/order in `index.html` (currently "Clayton Tanner")
-- [ ] 2–3 sentence intro (hero tagline in `index.html`)
+- [x] Confirm name spelling/order (Clayton Tanner, per resume)
+- [x] Resume PDF → `assets/resume.pdf` (copied Mar 2026 version)
+- [x] Hero intro + Experience section + Skills (drafted from resume — review the voice)
 - [ ] Photos of the Retro-Box → `assets/retrobox-hero.jpg` (+ swap the placeholder `.thumb` divs for `<img>` tags)
 - [ ] Short demo video/GIF of channel surfing
-- [ ] Resume PDF → `assets/resume.pdf`
 - [ ] Real GitHub + LinkedIn URLs (contact section + project page)
 - [ ] Verify/expand the "How it works" and "What was hard" sections in `projects/retro-box.html`
 - [ ] Skills list — keep only what's real, each linked to evidence
