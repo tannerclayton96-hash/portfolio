@@ -47,9 +47,29 @@ body::before {
     radial-gradient(900px 500px at 85% -10%, rgba(139, 92, 246, 0.13), transparent 65%),
     radial-gradient(800px 500px at -10% 20%, rgba(34, 211, 238, 0.10), transparent 60%),
     radial-gradient(900px 600px at 50% 110%, rgba(236, 72, 153, 0.08), transparent 60%);
+  animation: aurora-drift 26s ease-in-out infinite;
 }
 
 ::selection { background: rgba(139, 92, 246, 0.45); }
+
+/* interactive particle layer (js/particles.js) */
+#particles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* slow back-and-forth gradient mixing */
+@keyframes grad-mix {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+@keyframes aurora-drift {
+  0%, 100% { filter: hue-rotate(0deg); }
+  50%      { filter: hue-rotate(30deg); }
+}
 
 /* ---------- header ---------- */
 .site-header {
@@ -72,9 +92,11 @@ body::before {
   font-size: 1.2rem;
   text-decoration: none;
   background: var(--grad);
+  background-size: 220% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  animation: grad-mix 9s ease-in-out infinite;
 }
 
 .site-header nav { display: flex; gap: 0.25rem; flex-wrap: wrap; }
@@ -146,13 +168,16 @@ body::before {
 
 .hero-card h1 {
   font-size: clamp(2.4rem, 7vw, 3.8rem);
-  line-height: 1.1;
-  margin: 0.7rem 0 1rem;
+  line-height: 1.25;            /* roomy enough that descenders don't crop */
+  padding-bottom: 0.08em;       /* extra room for the y descender under clip */
+  margin: 0.55rem 0 0.9rem;
   letter-spacing: -0.02em;
   background: var(--grad);
+  background-size: 220% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  animation: grad-mix 9s ease-in-out infinite;
 }
 
 .tagline {
@@ -198,9 +223,11 @@ body::before {
 
 .btn-primary {
   background: var(--grad);
+  background-size: 220% 100%;
   border: none;
   color: #fff;
   box-shadow: 0 4px 24px rgba(139, 92, 246, 0.35);
+  animation: grad-mix 7s ease-in-out infinite;
 }
 
 .btn-primary:hover {
@@ -229,6 +256,8 @@ body::before {
   border-radius: 2px;
   margin-top: 0.5rem;
   background: var(--grad);
+  background-size: 300% 100%;
+  animation: grad-mix 8s ease-in-out infinite;
 }
 
 .section-lede { color: var(--ink-dim); margin: 0.9rem 0 2rem; }
@@ -387,12 +416,16 @@ body::before {
 
 .writeup h1 {
   font-size: 2.4rem;
+  line-height: 1.25;
+  padding-bottom: 0.08em;
   margin: 1rem 0;
   letter-spacing: -0.02em;
   background: var(--grad);
+  background-size: 220% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  animation: grad-mix 9s ease-in-out infinite;
 }
 
 .writeup h2 { font-size: 1.25rem; margin: 2.2rem 0 0.7rem; }
@@ -415,4 +448,7 @@ body::before {
   .hero-glow { transition: none; }
   .hero-card { transform: none !important; }
   .btn, .project-card { transition: none; }
+  #particles { display: none; }
+  body::before, .logo, .hero-card h1, .writeup h1,
+  .btn-primary, .section h2::after { animation: none; }
 }
