@@ -187,12 +187,12 @@
       let tx, ty, tc;
 
       if (mode === "wave" || !shapeTargets) {
-        // layered traveling waves over the home grid
+        // layered traveling waves over the home grid — kept slow and low-amplitude
         const wave =
-          Math.sin(d.gx * 0.006 + t * 1.1) * 26 +
-          Math.sin(d.gx * 0.013 - t * 0.7 + d.gy * 0.004) * 14 +
-          Math.sin(d.gy * 0.01 + t * 0.9 + d.ph) * 9;
-        tx = d.gx + Math.sin(d.gy * 0.008 + t * 0.55 + d.ph) * 12;
+          Math.sin(d.gx * 0.006 + t * 0.45) * 13 +
+          Math.sin(d.gx * 0.013 - t * 0.3 + d.gy * 0.004) * 7 +
+          Math.sin(d.gy * 0.01 + t * 0.38 + d.ph) * 4;
+        tx = d.gx + Math.sin(d.gy * 0.008 + t * 0.25 + d.ph) * 5;
         ty = d.gy + wave;
         tc = d.c;
       } else {
